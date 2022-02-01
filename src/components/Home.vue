@@ -10,6 +10,7 @@
                 <th>Name</th>
                 <th>Address</th>
                 <th>Contact</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
                 <td>{{item.name}}</td>
                 <td>{{item.address}}</td>
                 <td>{{item.contact}}</td>
+                <td> <router-link :to="'/update/'+item.id">Update</router-link> </td>
 
             </tr>
         </tbody>
