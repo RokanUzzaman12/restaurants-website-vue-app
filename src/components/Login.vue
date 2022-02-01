@@ -41,7 +41,7 @@ export default {
     mounted(){
         let userinfo = localStorage.getItem("user-info");
         if(userinfo){
-            this.$router.push({name:"Home"});
+            this.$router.push({name:"Home"}); 
         }
     }
 }
