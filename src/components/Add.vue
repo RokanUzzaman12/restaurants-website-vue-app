@@ -5,7 +5,7 @@
     <div class="add">
         <input type="text" placeholder="Enter Restaurant Name" v-model="restaurants.name">
         <input type="text" placeholder="Enter Address" v-model="restaurants.address">
-        <input type="password" placeholder="Enter Contact" v-model="restaurants.contact">
+        <input type="text" placeholder="Enter Contact" v-model="restaurants.contact">
         <button class="addbtn" v-on:click="getRestaurantData()">Add</button>
     </div>
 </div>
@@ -45,7 +45,7 @@ export default {
      mounted() {
         let userinfo = localStorage.getItem('user-info');
         if (!userinfo) {
-            this.$router.push("Signup");
+            this.$router.push({name:"Login"});
         }
     }
 }

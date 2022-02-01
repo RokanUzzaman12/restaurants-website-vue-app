@@ -19,7 +19,12 @@
                 <td>{{item.name}}</td>
                 <td>{{item.address}}</td>
                 <td>{{item.contact}}</td>
-                <td> <router-link :to="'/update/'+item.id">Update</router-link> </td>
+                <td>
+                     <router-link :to="'/update/'+item.id">Update</router-link>
+                     <button v-on:click="deleteFunction(item.id)">Delete</button>
+                
+                 </td>
+                
 
             </tr>
         </tbody>
@@ -44,13 +49,13 @@ export default {
     components: {
         Header
     },
-    async mounted() {
-
-        let userinfo = localStorage.getItem('user-info');
+    methods:{
+       async onLoad(){
+                    let userinfo = localStorage.getItem('user-info');
         //  this.name = JSON.parse(userinfo).name
 
         if (!userinfo) {
-            this.$router.push("Signup");
+            this.$router.push({name:"Login"});
         } else {
             this.name = JSON.parse(userinfo).name
         }
@@ -58,6 +63,23 @@ export default {
         let allrestaurants = await axios.get("http://localhost:3000/restaurants");
         // console.log(allrestaurants.data);
         this.restaurants = allrestaurants.data;
+        },
+
+      async deleteFunction(id){
+            confirm("Do you want to delete it");
+            let result = await axios.delete("http://localhost:3000/restaurants/"+id);
+            if(result.status==200){
+                this.onLoad();
+
+            }
+        }
+
+    },
+
+    
+     mounted() {
+
+         this.onLoad();
 
     }
 }
