@@ -3,17 +3,46 @@
     <img class="logo" src="../assets/res-logo.jpg">
     <h1>Sigh Up</h1>
     <div class="register">
-        <input type="text" placeholder="Enter Name">
-        <input type="text" placeholder="Enter Email">
-        <input type="password" placeholder="Enter Password">
-        <button class="signup">Sign Up</button>
+        <input type="text" placeholder="Enter Name" v-model="name">
+        <input type="text" placeholder="Enter Email" v-model="email">
+        <input type="password" placeholder="Enter Password" v-model="password">
+        <button class="signup" v-on:click="getUserData()">Sign Up</button>
     </div>
 </div>
 </template>
 
 <script>
+
+import axios from 'axios'
 export default {
-    name: "Signup"
+
+    name: "Signup",
+    data(){
+        return{
+            name:"",
+            email:"",
+            password:""
+        }
+    },
+    methods:{
+        async getUserData(){
+
+            let result = await axios.post("http://localhost:3000/users",{
+                name:this.name,
+                email:this.email,
+                password:this.password
+            });
+            //console.log("submit Result",result);
+            // console.log("submit Result",result.status);
+
+            if(result.status==201){
+                alert("Signup done");
+            }
+            localStorage.setItem("User Info",JSON.stringify(result.data));
+
+            
+        }
+    }
 }
 </script>
 
