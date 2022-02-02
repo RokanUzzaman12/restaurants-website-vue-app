@@ -24,11 +24,13 @@ export default {
         return{
             name:"",
             email:"",
-            password:""
+            password:"",
+            error:[]
         }
     },
     methods:{
         async getUserData(){
+            
 
             let result = await axios.post("http://localhost:3000/users",{
                 name:this.name,
